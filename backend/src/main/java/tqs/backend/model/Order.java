@@ -3,24 +3,33 @@ package tqs.backend.model;
 import java.sql.Date;
 import java.util.HashMap;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "orders")
 public class Order {
+
+	@Id
+	private String Id;
 	private Date dateCreated;
 	private Date dateDelivery;
+	@DBRef
 	private HashMap<Product, Integer> products;
 	private String status;
+	@DBRef
 	private User costumer;
-	private Address address;
-	private PicukpPoint pickupPoint;
+	@DBRef
+	private PickupPoint pickupPoint;
 	private String recipient;
 
 	public Order(Date dateCreated, Date dateDelivery, HashMap<Product, Integer> products, String status, User costumer,
-			Address address, PicukpPoint pickupPoint, String recipient) {
+			PickupPoint pickupPoint, String recipient) {
 		this.dateCreated = dateCreated;
 		this.dateDelivery = dateDelivery;
 		this.products = products;
 		this.status = status;
 		this.costumer = costumer;
-		this.address = address;
 		this.pickupPoint = pickupPoint;
 		this.recipient = recipient;
 	}
@@ -68,19 +77,11 @@ public class Order {
 		this.costumer = costumer;
 	}
 
-	public Address getAddress() {
-		return this.address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public PicukpPoint getPickupPoint() {
+	public PickupPoint getPickupPoint() {
 		return this.pickupPoint;
 	}
 
-	public void setPickupPoint(PicukpPoint pickupPoint) {
+	public void setPickupPoint(PickupPoint pickupPoint) {
 		this.pickupPoint = pickupPoint;
 	}
 
@@ -100,7 +101,6 @@ public class Order {
 				", products='" + getProducts() + "'" +
 				", status='" + getStatus() + "'" +
 				", costumer='" + getCostumer() + "'" +
-				", address='" + getAddress() + "'" +
 				", pickupPoint='" + getPickupPoint() + "'" +
 				", recipient='" + getRecipient() + "'" +
 				"}";

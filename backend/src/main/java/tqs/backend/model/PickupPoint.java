@@ -2,18 +2,18 @@ package tqs.backend.model;
 
 import java.util.HashMap;
 
-public class PicukpPoint {
+public class PickupPoint {
 	private String name;
 	private Address address;
 	private HashMap<Order, Integer> orders;
 
-	public PicukpPoint(String name, Address address, HashMap<Order, Integer> orders) {
+	public PickupPoint(String name, Address address, HashMap<Order, Integer> orders) {
 		this.name = name;
 		this.address = address;
 		this.orders = orders;
 	}
 
-	public PicukpPoint() {
+	public PickupPoint() {
 	}
 
 	public String getName() {
