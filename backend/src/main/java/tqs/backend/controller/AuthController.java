@@ -3,24 +3,20 @@ package tqs.backend.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import tqs.backend.model.User;
 import tqs.backend.util.JwtTokenUtil;
+import tqs.backend.service.AuthService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-
-	@Autowired
-	private AuthenticationManager authenticationManager;
 
 	@Autowired
 	private UserDetailsService userDetailsService;
@@ -29,29 +25,47 @@ public class AuthController {
 	private JwtTokenUtil jwtTokenUtil;
 
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private AuthService authService;
 
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+	public ResponseEntity<?> login(@RequestBody Map<String, String> loginRequest)
+			throws javax.naming.AuthenticationException {
 		try {
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-					loginRequest.getUsername(), loginRequest.getPassword()));
-			final UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
+			final String email = loginRequest.get("email");
+			System.out.printf("EMAIL->", email);
+			final String password = loginRequest.get("password");
+			final UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 			final String token = jwtTokenUtil.generateToken(userDetails);
-			return ResponseEntity.ok(new LoginResponse(token));
+
+			authService.loginUser(email, password);
+
+			Map<String, Object> responseBody = new HashMap<>();
+			responseBody.put("email", email);
+			responseBody.put("token", token);
+
+			return ResponseEntity.ok(responseBody);
 		} catch (AuthenticationException e) {
-			throw new BadCredentialsException("Invalid username or password");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e);
 		}
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<?> register(@RequestBody RegisterRequest registerRequest) {
-		// Verificar se o usuário já existe
+	public ResponseEntity<?> register(@RequestBody Map<String, String> registerRequest) {
+		String email = registerRequest.get("email");
+		String name = registerRequest.get("name");
+		String password = registerRequest.get("password");
 
-		// Criar um novo usuário
+		try {
+			authService.registerUser(name, email, password);
+		} catch (RuntimeException e) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(e);
+		}
 
-		// Salvar o usuário no banco de dados
+		Map<String, Object> responseBody = new HashMap<>();
+		responseBody.put("message", "Registration successful");
+		responseBody.put("name", name);
+		responseBody.put("email", email);
 
-		// Retornar uma resposta adequada
+		return ResponseEntity.status(HttpStatus.CREATED).body(responseBody);
 	}
 }

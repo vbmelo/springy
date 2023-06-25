@@ -1,0 +1,4 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://vbmelox:admin@cluster0.rnukme9.mongodb.net/test?retryWrites=true&w=majority
