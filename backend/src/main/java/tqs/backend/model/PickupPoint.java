@@ -4,10 +4,10 @@ import java.util.HashMap;
 
 public class PickupPoint {
 	private String name;
-	private Address address;
+	private String address;
 	private HashMap<Order, Integer> orders;
 
-	public PickupPoint(String name, Address address, HashMap<Order, Integer> orders) {
+	public PickupPoint(String name, String address, HashMap<Order, Integer> orders) {
 		this.name = name;
 		this.address = address;
 		this.orders = orders;
@@ -24,11 +24,11 @@ public class PickupPoint {
 		this.name = name;
 	}
 
-	public Address getAddress() {
+	public String getAddress() {
 		return this.address;
 	}
 
-	public void setAddress(Address address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 

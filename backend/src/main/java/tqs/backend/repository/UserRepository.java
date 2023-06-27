@@ -8,5 +8,9 @@ import tqs.backend.model.User;
 public interface UserRepository extends MongoRepository<User, String> {
 	User findByEmail(String email);
 
-	User findByName(String name);
+	User findByUsername(String username);
+
+	Boolean existsByUsername(String username);
+
+	Boolean existsByEmail(String email);
 }
