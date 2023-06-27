@@ -2,7 +2,14 @@ package tqs.backend.model;
 
 import java.util.HashMap;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "points")
 public class PickupPoint {
+
+	@Id
+	private String Id;
 	private String name;
 	private String address;
 	private HashMap<Order, Integer> orders;
