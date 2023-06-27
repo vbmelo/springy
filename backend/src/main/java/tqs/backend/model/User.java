@@ -3,21 +3,32 @@ package tqs.backend.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.security.core.GrantedAuthority;
 
 @Document(collection = "users")
 public class User {
 
 	@Id
 	private String id;
-	@Field("name")
-	private String name;
+
+	@Field("username")
+	private String username;
+
 	@Field("email")
 	private String email;
+
 	@Field("password")
 	private String password;
 
-	public User(String name, String email, String password) {
-		this.name = name;
+	public User(String id, String username, String email, String password) {
+		this.id = id;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+	}
+
+	public User(String username, String email, String password) {
+		this.username = username;
 		this.email = email;
 		this.password = password;
 	}
@@ -25,12 +36,20 @@ public class User {
 	public User() {
 	}
 
-	public String getName() {
-		return this.name;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
+		return this.username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getEmail() {
@@ -52,10 +71,15 @@ public class User {
 	@Override
 	public String toString() {
 		return "{" +
-				" name='" + getName() + "'" +
+				" id='" + getId() + "'" +
+				", username='" + getUsername() + "'" +
 				", email='" + getEmail() + "'" +
 				", password='" + getPassword() + "'" +
 				"}";
+	}
+
+	public GrantedAuthority getAuthorities() {
+		return null;
 	}
 
 }
