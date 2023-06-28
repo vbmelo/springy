@@ -5,15 +5,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
-// import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
-
 import tqs.backend.payload.request.LoginRequest;
 import tqs.backend.payload.request.RegisterRequest;
-// import tqs.backend.payload.response.UserInfoResponse;
 import tqs.backend.service.AuthService;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,17 +20,16 @@ public class AuthController {
 	private final AuthService authService;
 
 	@Autowired
-	public AuthController(
-			@Qualifier("customUserDetailsService") UserDetailsService userDetailsService, AuthService authService) {
+	public AuthController(AuthService authService,
+			@Qualifier("customUserDetailsService") UserDetailsService userDetailsService) {
 		this.authService = authService;
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) throws javax.naming.AuthenticationException {
+	public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
 		try {
 			String username = loginRequest.getUsername();
 			String password = loginRequest.getPassword();
-
 			authService.loginUser(username, password);
 
 			Map<String, Object> responseBody = new HashMap<>();

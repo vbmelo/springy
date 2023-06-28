@@ -1,40 +1,53 @@
 package tqs.backend.model;
 
-import java.sql.Date;
-import java.util.HashMap;
+import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "orders")
 public class Order {
 
 	@Id
-	private String Id;
+	private String id;
+
 	private Date dateCreated;
 	private Date dateDelivery;
-	@DBRef
-	private HashMap<Product, Integer> products;
+	private List<Product> products;
 	private String status;
-	@DBRef
-	private User costumer;
-	@DBRef
-	private PickupPoint pickupPoint;
-	private String recipient;
+	private String costumer;
+	private String pickupPoint;
 
-	public Order(Date dateCreated, Date dateDelivery, HashMap<Product, Integer> products, String status, User costumer,
-			PickupPoint pickupPoint, String recipient) {
+	public Order(Date dateCreated, Date dateDelivery, List<Product> products, String status, String costumer,
+			String pickupPoint) {
 		this.dateCreated = dateCreated;
 		this.dateDelivery = dateDelivery;
 		this.products = products;
 		this.status = status;
 		this.costumer = costumer;
 		this.pickupPoint = pickupPoint;
-		this.recipient = recipient;
 	}
 
 	public Order() {
+	}
+
+	public Order(Date dateDelivery, List<Product> products, String costumer, String pickupPoint) {
+		this.dateDelivery = dateDelivery;
+		this.products = products;
+		this.costumer = costumer;
+		this.pickupPoint = pickupPoint;
+	}
+
+	public Order(String string, String string2, String string3, String name) {
+	}
+
+	public String getId() {
+		return this.id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public Date getDateCreated() {
@@ -53,11 +66,11 @@ public class Order {
 		this.dateDelivery = dateDelivery;
 	}
 
-	public HashMap<Product, Integer> getProducts() {
+	public List<Product> getProducts() {
 		return this.products;
 	}
 
-	public void setProducts(HashMap<Product, Integer> products) {
+	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
 
@@ -69,28 +82,20 @@ public class Order {
 		this.status = status;
 	}
 
-	public User getCostumer() {
+	public String getCostumer() {
 		return this.costumer;
 	}
 
-	public void setCostumer(User costumer) {
+	public void setCostumer(String costumer) {
 		this.costumer = costumer;
 	}
 
-	public PickupPoint getPickupPoint() {
+	public String getPickupPoint() {
 		return this.pickupPoint;
 	}
 
-	public void setPickupPoint(PickupPoint pickupPoint) {
+	public void setPickupPoint(String pickupPoint) {
 		this.pickupPoint = pickupPoint;
-	}
-
-	public String getRecipient() {
-		return this.recipient;
-	}
-
-	public void setRecipient(String recipient) {
-		this.recipient = recipient;
 	}
 
 	@Override
@@ -102,7 +107,6 @@ public class Order {
 				", status='" + getStatus() + "'" +
 				", costumer='" + getCostumer() + "'" +
 				", pickupPoint='" + getPickupPoint() + "'" +
-				", recipient='" + getRecipient() + "'" +
 				"}";
 	}
 
