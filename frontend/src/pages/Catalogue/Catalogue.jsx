@@ -3,8 +3,10 @@ import { useState, useEffect } from 'react';
 import { GET_PRODUCTS } from '../../urls';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
+import { useAuth } from '../../hooks/useAuth';
 
 export default function Catalogue () {
+	const {addToCart} = useAuth();
 	const [products, setProducts] = useState([]);
 	useEffect(() => {
 		getProducts();
@@ -24,6 +26,7 @@ export default function Catalogue () {
 
 	const handleAddToCart = (product) => {
 		console.log("Adding this, ", product, " to cart")
+		addToCart(product);
 	}
 
 		

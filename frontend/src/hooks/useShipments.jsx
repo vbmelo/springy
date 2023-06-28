@@ -1,3 +1,6 @@
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable react/prop-types */
+/* eslint-disable no-undef */
 import React, { useState, useEffect, useContext } from "react";
 
 // create the useShipments hook with its own context
@@ -56,5 +59,3 @@ export const ShipmentsProvider = ({ children }) => {
 		</ShipmentsContext.Provider>
 	);
 };
-
-ex;

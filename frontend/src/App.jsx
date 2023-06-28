@@ -9,6 +9,8 @@ import HomePage from "./pages/HomePage/HomePage";
 import PickupPoints from "./pages/PickupPoints/PickupPoints";
 import { useAuth } from "./hooks/useAuth";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import Cart from "./pages/Cart/Cart";
+import Orders from "./pages/Orders/Orders";
 
 function App() {
 	const { auth } = useAuth();
@@ -23,8 +25,8 @@ function App() {
 						<Route index element={<HomePage />} />
 						<Route path="home" element={<HomePage />} />
 						<Route path="pickup-points" element={<PickupPoints />} />
-						<Route path="orders" element={<HomePage />} />
-						<Route path="cart" element={<HomePage />} />
+						<Route path="orders" element={<Orders />} />
+						<Route path="cart" element={<Cart/>} />
 					</Route>
         </Route>
 				<Route path="*" element={<p>There is nothing here: 404!</p>} />

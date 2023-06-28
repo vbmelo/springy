@@ -19,6 +19,10 @@ const initialAuthState = {
 
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(initialAuthState);
+	const [cart, setCart] = useState(() => {
+    const storedCart = localStorage.getItem("cart");
+    return storedCart ? JSON.parse(storedCart) : [];
+  });
   const navigate = useNavigate();
 
   const submitLogin = async (e, userData) => {
@@ -80,9 +84,28 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    const username = localStorage.getItem("username"); // Retrieve from localStorage
+  const addToCart = (product) => {
+    setCart((prevCart) => {
+      const updatedCart = [...prevCart, product];
+      localStorage.setItem("cart", JSON.stringify(updatedCart)); // Store in localStorage
+      return updatedCart;
+    });
+  };
 
+  const removeFromCart = (product) => {
+    setCart((prevCart) => {
+      const updatedCart = prevCart.filter((p) => p.name !== product.name);
+      localStorage.setItem("cart", JSON.stringify(updatedCart)); // Store in localStorage
+      return updatedCart;
+    });
+  };
+
+	const clearCart = () => {
+		setCart([]);
+	}
+
+  useEffect(() => {
+    const username = localStorage.getItem("username");
     if (username) {
       setAuth((prevAuth) => ({
         ...prevAuth,
@@ -98,8 +121,14 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
   return (
-    <AuthContext.Provider value={{ auth, submitLogin, submitRegister }}>
+    <AuthContext.Provider
+      value={{ auth, cart, addToCart, removeFromCart, clearCart, submitLogin, submitRegister }}
+    >
       {children}
     </AuthContext.Provider>
   );

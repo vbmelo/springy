@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import styles from "./Login.module.css";
 import { useAuth } from "../../hooks/useAuth";

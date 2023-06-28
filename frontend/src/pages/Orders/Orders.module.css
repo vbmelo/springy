@@ -1,0 +1,22 @@
+.orders_title {
+	font-weight: 600;
+	margin-bottom: 1rem;
+	color: var(--white);
+}
+.orders_empty {
+	font-size: 1.2rem;
+	font-weight: 600;
+	color: var(--white);
+	background-color: var(--gray-700);
+
+	padding: 2rem;
+	text-align: center;
+	border-radius: 1rem;
+}
+
+.orders {
+	margin-top: 2rem;
+	background-color: var(--gray-700);
+	border-radius: 1rem;
+	padding: 1rem;
+}
