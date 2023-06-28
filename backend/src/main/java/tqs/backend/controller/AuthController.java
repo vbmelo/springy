@@ -13,6 +13,7 @@ import tqs.backend.service.AuthService;
 import java.util.HashMap;
 import java.util.Map;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {

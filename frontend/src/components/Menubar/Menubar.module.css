@@ -1,0 +1,20 @@
+.menubar_logo_wrapper {
+	border-radius: 1rem;
+	margin: auto;
+}
+.menubar_logo_wrapper img {
+	max-width: 12rem;
+	width: 100%;
+}
+.menubar_menu_wrapper {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+.links {
+	color: var(--white);
+	padding: 1rem;
+	margin: 0 1rem;
+}

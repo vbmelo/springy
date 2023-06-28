@@ -1,0 +1,81 @@
+.pickupPoints_wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: center;
+	width: 100%;
+
+	background-color: var(--gray-700);
+	border-radius: 1rem;
+
+	padding: 0.3rem 0;
+}
+
+.pickupPoints_title {
+	background-color: var(--gray-700);
+	color: var(--green-amanacu-3);
+	text-align: flex-start;
+	font-size: 1.8rem;
+	font-weight: 600;
+	padding: 0.7rem 1rem;
+	
+	/* border-top: 0.4rem solid var(--green-amanacu-3); */
+	border-radius: 1rem 1rem 0 0;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	justify-items: center;
+}
+.pickupPoints_refresh_button:hover {
+	padding: 0.1rem;
+}
+
+.pickupPoints_table {
+	border-radius: 1rem;
+}
+
+/* .pickupPoints_table_td_actions {
+	text-align: center;
+} */
+
+.pickupPoints_search_wrapper{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	align-content: center
+}
+.pickupPoints_search_wrapper > * {
+	border-radius: 0 !important;
+}
+.pickupPoints_search_dropdownBtn *{
+	border: none;
+	border-radius: 0 !important;
+	border-top: 0.1rem solid var(--green-amanacu-3);
+}
+.pickupPoints_search_button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	text-align: center;
+
+	gap: 0.2rem;
+}
+.pickupPoints_search {
+	background-color: var(--dark-bs-btn);
+	color: var(--white) !important;
+	padding: 0.36rem;
+	width: 100%;
+
+	border: none;
+	border-radius: 0 !important;
+	border-top: 0.1rem solid var(--green-amanacu-3);
+}
+.pickupPoints_search:active, .pickupPoints_search:focus {
+	background-color: var(--dark-500);
+	border: none;
+	box-shadow: inset 1rem var(--green-amanacu-3);
+}
