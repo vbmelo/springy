@@ -8,6 +8,9 @@ public class LoginRequest {
 	@Field("password")
 	private String password;
 
+	public LoginRequest(String string, String string2) {
+	}
+
 	public String getUsername() {
 		return username;
 	}

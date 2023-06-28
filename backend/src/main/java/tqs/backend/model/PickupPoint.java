@@ -1,6 +1,6 @@
 package tqs.backend.model;
 
-import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,15 +9,20 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class PickupPoint {
 
 	@Id
-	private String Id;
+	private String id;
 	private String name;
 	private String address;
-	private HashMap<Order, Integer> orders;
+	private List<Order> orders;
 
-	public PickupPoint(String name, String address, HashMap<Order, Integer> orders) {
+	public PickupPoint(String name, String address, List<Order> orders) {
 		this.name = name;
 		this.address = address;
 		this.orders = orders;
+	}
+
+	public PickupPoint(String name, String address) {
+		this.name = name;
+		this.address = address;
 	}
 
 	public PickupPoint() {
@@ -39,11 +44,11 @@ public class PickupPoint {
 		this.address = address;
 	}
 
-	public HashMap<Order, Integer> getOrders() {
+	public List<Order> getOrders() {
 		return this.orders;
 	}
 
-	public void setOrders(HashMap<Order, Integer> orders) {
+	public void setOrders(List<Order> orders) {
 		this.orders = orders;
 	}
 

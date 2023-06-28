@@ -10,6 +10,9 @@ public class RegisterRequest {
 	@Field("password")
 	private String password;
 
+	public RegisterRequest(String string, String string2, String string3) {
+	}
+
 	public String getUsername() {
 		return username;
 	}
